@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { VideoComponent } from '../../layout/video/video.component';
+import { LoaderComponent } from "../../layout/loader/loader.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterModule, VideoComponent],
+  imports: [FormsModule, RouterModule, VideoComponent, LoaderComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })

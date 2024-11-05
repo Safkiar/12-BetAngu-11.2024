@@ -1,6 +1,8 @@
-<app-video />
+<app-video></app-video>
+
 <div class="RegisterContainer">
   <h2>Register</h2>
+  <app-loader [isLoading]="isLoading()"></app-loader>
   <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
     <div class="inputContainer">
       <input
@@ -22,6 +24,7 @@
       }
     </div>
     }
+
     <div class="inputContainer">
       <input
         type="text"
@@ -91,6 +94,11 @@
       Register
     </button>
   </form>
+
+  <!-- Display registration error if there is one -->
+  <div class="loginError" *ngIf="registrationError">
+    <p>{{ registrationError }}</p>
+  </div>
 
   <div class="registerLink">
     <p>Already registered?</p>

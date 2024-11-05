@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth.service';
 import { VideoComponent } from '../../layout/video/video.component';
+import { LoaderComponent } from '../../layout/loader/loader.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterLink, VideoComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    VideoComponent,
+    LoaderComponent,
+  ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
@@ -19,7 +27,10 @@ export class RegisterComponent {
   passwordMismatch = false;
   registrationError = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  isLoading = signal(false);
+
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   async register(form: any) {
     if (this.password !== this.confirmPassword) {
@@ -29,13 +40,14 @@ export class RegisterComponent {
       this.passwordMismatch = false;
     }
 
+    this.isLoading.set(true);
+
     try {
       await this.authService.registerUser(
         this.email,
         this.password,
         this.username
       );
-
       this.router.navigate(['/home']);
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
@@ -47,6 +59,8 @@ export class RegisterComponent {
       } else {
         this.registrationError = 'Registration failed. Please try again.';
       }
+    } finally {
+      this.isLoading.set(false);
     }
   }
 }
