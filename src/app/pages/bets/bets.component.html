@@ -82,7 +82,7 @@
     </div>
   </ng-template>
 
-  <div class="pagination-controls">
+  <div class="pagination-controls" *ngIf="bets.length > itemsPerPage">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
