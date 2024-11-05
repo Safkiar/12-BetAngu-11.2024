@@ -1,0 +1,105 @@
+.home {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  @media only screen and (max-width: 385px) {
+    min-width: 250px;
+  }
+}
+
+button {
+  background-color: #28b485;
+  padding: 0.8rem 1rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #7ed56f;
+}
+
+.icon-toggle {
+  font-size: 1.5rem;
+  color: #faf9f9;
+  position: absolute;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.invisibleClass {
+  opacity: 0;
+}
+
+.visibleClass {
+  opacity: 1;
+}
+
+.animate-up {
+  animation: iconUp 0.5s forwards;
+}
+
+.animate-down {
+  animation: iconDown 0.5s forwards;
+}
+
+.animate-up2 {
+  animation: iconUp2 0.5s forwards;
+}
+
+.animate-down2 {
+  animation: iconDown2 0.5s forwards;
+}
+
+@keyframes iconUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes iconUp2 {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+.hidden {
+  opacity: 0;
+}
+
+@keyframes iconDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes iconDown2 {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

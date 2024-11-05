@@ -1,0 +1,98 @@
+.ranking-table {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+
+  .ranking-header,
+  .ranking-row {
+    display: contents; /* Allows children to follow the grid structure */
+  }
+
+  .ranking-header div,
+  .ranking-row div {
+    padding: 0.5rem;
+    border-bottom: 2px solid #ddd;
+    text-align: left;
+  }
+
+  .ranking-header div {
+    font-weight: bold;
+  }
+
+  .ranking-header div:nth-child(3),
+  .ranking-header div:nth-child(4),
+  .ranking-header div:nth-child(5) {
+    color: #28b485;
+    cursor: pointer;
+  }
+
+  .ranking-header div:nth-child(1),
+  .ranking-header div:nth-child(2) {
+    cursor: default;
+  }
+
+  .ranking-header div:nth-child(3):hover,
+  .ranking-header div:nth-child(4):hover,
+  .ranking-header div:nth-child(5):hover {
+    color: #7ed56f;
+    cursor: pointer;
+  }
+
+  .ranking-header div span {
+    margin-left: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .ranking-row div {
+    border-bottom: 1px solid #dddddd6e;
+  }
+
+  .no-rankings {
+    grid-column: span 5;
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+  }
+
+  .pagination-controls {
+    grid-column: span 5;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  ::ng-deep .pagination-controls ul.ngx-pagination {
+    span {
+      color: #faf9f9;
+      &:hover {
+        color: #7ed56f;
+      }
+    }
+    .current {
+      background-color: #28b485;
+      span:hover {
+        color: #faf9f9;
+      }
+    }
+
+    a:hover {
+      background-color: transparent;
+    }
+    .pagination-next a {
+      color: #faf9f9;
+      &:hover {
+        color: #7ed56f;
+      }
+    }
+
+    .pagination-previous a {
+      color: #faf9f9;
+      &:hover {
+        color: #7ed56f;
+      }
+    }
+  }
+}
+
+.gold-row {
+  color: #ffd700;
+}

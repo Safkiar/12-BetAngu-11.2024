@@ -1,0 +1,36 @@
+<app-video />
+<div class="logContainer">
+  <h2>BetAngu</h2>
+  <form (submit)="login($event)">
+    <div class="inputContainer">
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="user@example.com"
+        required
+      />
+    </div>
+    <div class="inputContainer">
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        placeholder="user@example.com"
+      />
+    </div>
+    <button type="submit">Login</button>
+  </form>
+
+  @if (loginError) {
+  <div class="loginError">
+    <p>{{ loginError }}</p>
+  </div>
+  }
+
+  <div class="registerLink">
+    <p>Do not have an account?</p>
+    <a routerLink="/register">Register</a>
+  </div>
+</div>

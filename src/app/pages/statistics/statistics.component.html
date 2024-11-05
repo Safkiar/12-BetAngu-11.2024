@@ -1,0 +1,24 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<div *ngIf="error">
+  <p>{{ error }}</p>
+</div>
+
+<div *ngIf="!error && !isLoading" class="StatsWrapper">
+  <div class="container">
+    <div class="first-half">
+      <p><strong>Total Bets</strong></p>
+      <p><strong>Total Income</strong></p>
+      <p><strong>Money Lost</strong></p>
+      <p><strong>Wins</strong></p>
+      <p><strong>Losses</strong></p>
+    </div>
+    <div class="second-half">
+      <p>{{ totalBet | number : "1.2-2" }}</p>
+      <p>{{ totalIncome | number : "1.2-2" }}</p>
+      <p>{{ totalLosses | number : "1.2-2" }}</p>
+      <p>{{ numberOfWins }}</p>
+      <p>{{ numberOfLosses }}</p>
+    </div>
+  </div>
+</div>

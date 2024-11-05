@@ -1,0 +1,17 @@
+.bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  overflow: hidden;
+
+  .bg-video__content {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}

@@ -1,0 +1,26 @@
+<div class="home">
+  <h2>Add your bets</h2>
+
+  <button (click)="toggleForm()">
+    <i
+      class="fas fa-angle-down icon-toggle"
+      [ngClass]="[
+        showForm ? 'animate-up' : '',
+        !showForm && initialState ? 'animate-down ' : ''
+      ]"
+    ></i>
+
+    <i
+      class="fas fa-angle-up icon-toggle"
+      [ngClass]="[
+        showForm ? 'animate-down2 ' : '',
+        !showForm && initialState ? 'animate-up2' : '',
+        !initialState ? 'hidden' : ''
+      ]"
+    ></i>
+  </button>
+</div>
+
+@if (showForm) {
+<app-form></app-form>
+}

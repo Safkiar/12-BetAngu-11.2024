@@ -1,0 +1,198 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<!-- Form Wrapper -->
+<form (ngSubmit)="submitForm()" #betForm="ngForm" [class.disabled]="isLoading">
+  <!-- Display submission error if any -->
+  <div *ngIf="submissionError">
+    <p>{{ submissionError }}</p>
+  </div>
+
+  <!-- Main form fields -->
+  <input
+    type="hidden"
+    [(ngModel)]="betID"
+    name="betID"
+    required
+    #betIDInput="ngModel"
+  />
+
+  <div class="rowDiv">
+    <input
+      class="align"
+      type="date"
+      [(ngModel)]="date"
+      name="date"
+      required
+      #dateInput="ngModel"
+    />
+  </div>
+
+  <div class="rowDiv">
+    <div class="firstHalf">
+      <label> Result </label>
+    </div>
+    <div class="secondHalf">
+      <select
+        [(ngModel)]="result"
+        name="result"
+        required
+        #resultInput="ngModel"
+        (change)="onResultChange()"
+      >
+        <option value="" selected disabled>Result</option>
+        <option [ngValue]="true">Won</option>
+        <option [ngValue]="false">Lost</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="rowDiv">
+    <div class="firstHalf">
+      <label> Interest: </label>
+    </div>
+    <div class="secondHalf">
+      <input
+        type="number"
+        [(ngModel)]="interest"
+        name="interest"
+        required
+        min="1"
+        max="20"
+        step="0.01"
+        #interestInput="ngModel"
+        (ngModelChange)="calculateTotalWin()"
+        placeholder="1 - 20"
+      />
+    </div>
+  </div>
+
+  <div class="rowDiv">
+    <div class="firstHalf">
+      <label> Tax: </label>
+    </div>
+    <div class="secondHalf">
+      <input
+        type="number"
+        [(ngModel)]="tax"
+        name="tax"
+        min="0.1"
+        max="1"
+        step="0.01"
+        #taxInput="ngModel"
+        (ngModelChange)="calculateTotalWin()"
+        placeholder="0.1 - 1"
+      />
+    </div>
+  </div>
+
+  <div class="rowDiv">
+    <div class="firstHalf">
+      <label>Bet: </label>
+    </div>
+    <div class="secondHalf">
+      <input
+        type="number"
+        [(ngModel)]="totalBet"
+        name="totalBet"
+        required
+        min="0.01"
+        step="0.01"
+        #totalBetInput="ngModel"
+        (ngModelChange)="calculateTotalWin()"
+      />
+    </div>
+  </div>
+
+  <div class="rowDiv">
+    <div class="firstHalf">
+      <strong>Total Win:</strong>
+    </div>
+    <div class="secondHalf left">{{ totalWin | number : "1.2-2" }}</div>
+  </div>
+
+  <input
+    type="hidden"
+    [value]="income | number : '1.2-2'"
+    name="income"
+    readonly
+  />
+
+  <div class="rowDiv">
+    <div class="thirdHalf">
+      <h4>Bets</h4>
+    </div>
+  </div>
+
+  <div *ngFor="let bet of bets; let i = index">
+    <div class="space">
+      <div class="rowDiv">
+        <div class="firstHalf">
+          <label> Winner: </label>
+        </div>
+        <div class="fourthHalf">
+          <input
+            type="text"
+            [(ngModel)]="bet.betOn"
+            name="betOn{{ i }}"
+            required
+            #betOnInput="ngModel"
+          />
+        </div>
+      </div>
+
+      <div class="rowDiv">
+        <div class="firstHalf">
+          <label> Opponent: </label>
+        </div>
+        <div class="fourthHalf">
+          <input
+            type="text"
+            [(ngModel)]="bet.betVs"
+            name="betVs{{ i }}"
+            required
+            #betVsInput="ngModel"
+          />
+        </div>
+      </div>
+
+      <div class="rowDiv">
+        <div class="firstHalf">
+          <label> Did you win? </label>
+        </div>
+        <div class="fourthHalf">
+          <select
+            [(ngModel)]="bet.won"
+            name="won{{ i }}"
+            required
+            #wonInput="ngModel"
+            [disabled]="result === true"
+          >
+            <option value="" disabled>Select Result</option>
+            <option [ngValue]="true">Won</option>
+            <option [ngValue]="false">Lost</option>
+          </select>
+        </div>
+      </div>
+
+      <button
+        class="remove"
+        type="button"
+        (click)="removeBet(i)"
+        *ngIf="bets.length > 1"
+      >
+        Remove
+      </button>
+    </div>
+    <hr />
+  </div>
+
+  <div class="buttonRow">
+    <div class="buttonFirst">
+      <button type="button" (click)="addBet()">Add Bet</button>
+    </div>
+    <div class="buttonSecond">
+      <button type="submit" class="third" [disabled]="betForm.invalid">
+        Submit Bet
+      </button>
+    </div>
+  </div>
+</form>

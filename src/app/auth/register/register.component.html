@@ -1,0 +1,99 @@
+<app-video />
+<div class="RegisterContainer">
+  <h2>Register</h2>
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <div class="inputContainer">
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        email
+        #emailInput="ngModel"
+        placeholder="email"
+      />
+    </div>
+    @if (emailInput.invalid && emailInput.touched) {
+    <div class="loginError">
+      @if (emailInput.errors?.['required']) {
+      <small>Email is required.</small>
+      } @else if (emailInput.errors?.['email']) {
+      <small>Invalid email address.</small>
+      }
+    </div>
+    }
+    <div class="inputContainer">
+      <input
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        required
+        minlength="3"
+        #usernameInput="ngModel"
+        placeholder="Username"
+      />
+    </div>
+    @if (usernameInput.invalid && usernameInput.touched) {
+    <div class="loginError">
+      @if (usernameInput.errors?.['required']) {
+      <small>Username is required.</small>
+      } @else if (usernameInput.errors?.['minlength']) {
+      <small>Username must be at least 3 characters long.</small>
+      }
+    </div>
+    }
+
+    <div class="inputContainer">
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        minlength="5"
+        #passwordInput="ngModel"
+        placeholder="Password"
+      />
+    </div>
+    @if (passwordInput.invalid && passwordInput.touched) {
+    <div class="loginError">
+      @if (passwordInput.errors?.['required']) {
+      <small>Password is required.</small>
+      } @else if (passwordInput.errors?.['minlength']) {
+      <small>Password must be at least 5 characters long.</small>
+      }
+    </div>
+    }
+
+    <div class="inputContainer">
+      <input
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        required
+        #confirmPasswordInput="ngModel"
+        placeholder="Confirm Password"
+      />
+    </div>
+
+    @if (confirmPasswordInput.invalid && confirmPasswordInput.touched) {
+    <div class="loginError">
+      @if (confirmPasswordInput.errors?.['required']) {
+      <small>Confirm password is required.</small>
+      }
+    </div>
+    } @if (passwordMismatch && confirmPasswordInput.touched) {
+    <div class="loginError">
+      <small>Passwords do not match.</small>
+    </div>
+    }
+
+    <button type="submit" [disabled]="registerForm.invalid || passwordMismatch">
+      Register
+    </button>
+  </form>
+
+  <div class="registerLink">
+    <p>Already registered?</p>
+    <a routerLink="/login">Login</a>
+  </div>
+</div>

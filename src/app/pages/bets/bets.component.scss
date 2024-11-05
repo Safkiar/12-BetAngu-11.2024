@@ -1,0 +1,148 @@
+.bets-table {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+
+  .bets-header,
+  .bets-row {
+    display: contents;
+  }
+
+  .bets-header div {
+    padding: 0.5rem;
+    border-bottom: 2px solid #ddd;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .bets-header div.clickable {
+    cursor: pointer;
+
+    &:hover {
+      color: #7ed56f;
+    }
+  }
+
+  .bets-header div:last-child {
+    cursor: default;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  .bets-header div span {
+    margin-left: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .bets-row div {
+    padding: 0.5rem;
+    border-bottom: 1px solid #dddddd6e;
+    text-align: center;
+  }
+
+  .bets-row {
+    position: relative;
+
+    &:hover + .bets-details {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 500px; /* Adjust as needed */
+      padding: 1rem;
+    }
+  }
+
+  .won {
+    background-color: #d4edda; /* Light green */
+  }
+
+  .lost {
+    background-color: #f8d7da; /* Light red */
+  }
+
+  .bets-row .won-text {
+    color: green;
+  }
+
+  .bets-row .lost-text {
+    color: red;
+  }
+
+  .bets-row:hover + .bets-details {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  }
+
+  .bets-details {
+    display: none;
+    grid-column: span 6;
+    padding: 0 1rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  }
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .no-bets {
+    grid-column: span 6;
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+  }
+
+  .pagination-controls {
+    grid-column: span 6;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  ::ng-deep .pagination-controls ul.ngx-pagination {
+    span {
+      color: #faf9f9;
+
+      &:hover {
+        color: #7ed56f;
+      }
+    }
+
+    .current {
+      background-color: #28b485;
+
+      span:hover {
+        color: #faf9f9;
+      }
+    }
+
+    a:hover {
+      background-color: transparent;
+    }
+
+    .pagination-next a,
+    .pagination-previous a {
+      color: #faf9f9;
+
+      &:hover {
+        color: #7ed56f;
+      }
+    }
+  }
+
+  .bets-row button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}

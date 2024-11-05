@@ -1,0 +1,25 @@
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.StatsWrapper {
+  margin-top: 1rem;
+}
+.container {
+  display: flex;
+
+  .first-half {
+    width: 50%;
+    text-align: center;
+  }
+  .second-half {
+    width: 50%;
+    text-align: center;
+  }
+}

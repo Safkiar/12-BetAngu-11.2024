@@ -1,0 +1,184 @@
+.side-nav {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.096);
+
+  list-style: none;
+
+  @media only screen and (max-width: 900px) {
+    display: flex;
+    margin: 0;
+    height: 40px;
+  }
+  @media only screen and (max-width: 400px) {
+    flex-direction: column;
+    display: block;
+    height: auto;
+  }
+
+  a {
+    height: 40px;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+
+      @media only screen and (max-width: 900px) {
+        margin: 0;
+      }
+    }
+
+    @media only screen and (max-width: 900px) {
+      flex: 1;
+    }
+  }
+
+  &__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: #28b485;
+    transform: scaleY(0);
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+      background-color 0.1s;
+    z-index: 1;
+  }
+
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+
+  &__item:active::before {
+    background-color: #28b485;
+  }
+
+  &__link:link,
+  &__link:visited {
+    color: #faf9f9;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+
+    @media only screen and (max-width: 900px) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+      flex-direction: column;
+      padding: 1.5rem 0.5rem;
+    }
+  }
+
+  button {
+    position: relative;
+    z-index: 10;
+    background-color: transparent;
+    border: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .fas {
+      color: white;
+      font-size: 1.2rem;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0c382a;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 12px;
+}
+
+.modal__content {
+  text-align: center;
+}
+
+.modal__button--confirm,
+.modal__button--cancel {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #fff;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: #28b485;
+    transform: scaleY(0);
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+      background-color 0.1s;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+}
+
+.modal__button--confirm::before {
+  background-color: #3ba75f;
+}
+
+.modal__button--cancel::before {
+  background-color: #f80606;
+}
+
+.modal__button--confirm {
+  background-color: #55c57a;
+}
+
+.modal__button--cancel {
+  background-color: #ff4c4c;
+}

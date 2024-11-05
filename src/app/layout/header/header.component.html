@@ -1,0 +1,47 @@
+@if (isModalVisible){
+<div class="modal-overlay"></div>
+<div class="modal">
+  <div class="modal__content">
+    <button class="modal__button--confirm" (click)="confirmLogout()">
+      LOGOUT
+    </button>
+    <button class="modal__button--cancel" (click)="closeModal()">Cancel</button>
+  </div>
+</div>
+}
+<ul class="side-nav">
+  @if (isLoggedInSignal()) {
+  <li
+    class="side-nav__item"
+    [class.side-nav__item--active]="isRouteActive('/home')"
+  >
+    <a class="side-nav__link" routerLink="/home">Home</a>
+  </li>
+  <li
+    class="side-nav__item"
+    [class.side-nav__item--active]="isRouteActive('/bets')"
+  >
+    <a class="side-nav__link" routerLink="/bets">Bets</a>
+  </li>
+  <li
+    class="side-nav__item"
+    [class.side-nav__item--active]="isRouteActive('/statistics')"
+  >
+    <a class="side-nav__link" routerLink="/statistics">Statistics</a>
+  </li>
+  <li
+    class="side-nav__item"
+    [class.side-nav__item--active]="isRouteActive('/ranking')"
+  >
+    <a class="side-nav__link" routerLink="/ranking">Ranking</a>
+  </li>
+  <li
+    class="side-nav__item"
+    [class.side-nav__item--active]="isRouteActive('/logout')"
+  >
+    <button class="side-nav__link" (click)="openModal()">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </li>
+  }
+</ul>

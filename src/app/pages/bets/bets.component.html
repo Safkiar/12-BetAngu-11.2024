@@ -1,0 +1,88 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<div *ngIf="error">
+  <p>{{ error }}</p>
+</div>
+
+<div class="bets-table" *ngIf="!error && !isLoading">
+  <div class="bets-header">
+    <div class="clickable" (click)="sortBets('Date')">
+      Date
+      <span *ngIf="sortKey === 'Date'">
+        {{ sortDirection ? "↑" : "↓" }}
+      </span>
+    </div>
+    <div class="clickable" (click)="sortBets('Income')">
+      Income
+      <span *ngIf="sortKey === 'Income'">
+        {{ sortDirection ? "↑" : "↓" }}
+      </span>
+    </div>
+    <div class="clickable" (click)="sortBets('Interest')">
+      Interest
+      <span *ngIf="sortKey === 'Interest'">
+        {{ sortDirection ? "↑" : "↓" }}
+      </span>
+    </div>
+    <div class="clickable" (click)="sortBets('Result')">
+      Result
+      <span *ngIf="sortKey === 'Result'">
+        {{ sortDirection ? "↑" : "↓" }}
+      </span>
+    </div>
+    <div class="clickable" (click)="sortBets('TotalBet')">
+      Bet
+      <span *ngIf="sortKey === 'TotalBet'">
+        {{ sortDirection ? "↑" : "↓" }}
+      </span>
+    </div>
+    <div>Actions</div>
+  </div>
+
+  <ng-container *ngIf="bets.length > 0; else noBets">
+    <ng-container
+      *ngFor="
+        let bet of bets
+          | paginate : { itemsPerPage: itemsPerPage, currentPage: p };
+        let i = index
+      "
+    >
+      <div class="bets-row" [ngClass]="{ won: bet.Result, lost: !bet.Result }">
+        <div>{{ bet.Date.toDate() | date : "shortDate" }}</div>
+        <div>{{ bet.Income | number : "1.2-2" }}</div>
+        <div>{{ bet.Interest }}</div>
+        <div [ngClass]="{ 'won-text': bet.Result, 'lost-text': !bet.Result }">
+          {{ bet.Result ? "Won" : "Lost" }}
+        </div>
+        <div>{{ bet.TotalBet | number : "1.2-2" }}</div>
+        <div>
+          <button (click)="deleteBet(bet)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="bets-details">
+        <div style="grid-column: span 6">
+          <strong>All Bets:</strong>
+          <ul>
+            <li *ngFor="let key of getAllBetsKeys(bet.AllBets)">
+              {{ formatBetKey(key) }}:
+              {{ bet.AllBets[key] ? "Won" : "Lost" }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noBets>
+    <div class="no-bets" style="grid-column: span 6; text-align: center">
+      No bets found.
+    </div>
+  </ng-template>
+
+  <div class="pagination-controls">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

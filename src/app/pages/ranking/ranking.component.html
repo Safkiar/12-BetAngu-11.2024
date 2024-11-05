@@ -1,0 +1,60 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+
+<div *ngIf="!isLoading">
+  <div class="ranking-table" *ngIf="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div class="ranking-table" *ngIf="!error">
+    <div class="ranking-header">
+      <div>Rank</div>
+      <div>User</div>
+      <div (click)="sortRankings('Total')">
+        Total Bet
+        <span *ngIf="sortKey === 'Total'">
+          {{ sortDirection ? "↑" : "↓" }}
+        </span>
+      </div>
+      <div (click)="sortRankings('Income')">
+        Income
+        <span *ngIf="sortKey === 'Income'">
+          {{ sortDirection ? "↑" : "↓" }}
+        </span>
+      </div>
+      <div (click)="sortRankings('WinRatio')">
+        Win (%)
+        <span *ngIf="sortKey === 'WinRatio'">
+          {{ sortDirection ? "↑" : "↓" }}
+        </span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="rankings.length > 0; else noRankings">
+      <div
+        *ngFor="
+          let userRanking of rankings
+            | paginate : { itemsPerPage: itemsPerPage, currentPage: p };
+          let i = index
+        "
+        [ngClass]="{ 'gold-row': p === 1 && i === 0 }"
+        class="ranking-row"
+      >
+        <div>{{ (p - 1) * itemsPerPage + i + 1 }}</div>
+        <div>{{ userRanking.name }}</div>
+        <div>{{ userRanking.Total | number : "1.2-2" }}</div>
+        <div>{{ userRanking.Income | number : "1.2-2" }}</div>
+        <div>{{ userRanking.WinRatio | number : "1.0-2" }}%</div>
+      </div>
+    </ng-container>
+
+    <ng-template #noRankings>
+      <div class="no-rankings" style="grid-column: span 5; text-align: center">
+        No rankings found.
+      </div>
+    </ng-template>
+
+    <div class="pagination-controls">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
