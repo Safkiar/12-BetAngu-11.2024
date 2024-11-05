@@ -1,7 +1,7 @@
 <div class="home">
   <h2>Add your bets</h2>
 
-  <button (click)="toggleForm()">
+  <button (click)="toggleForm()" [ngClass]="{ pulsate: !showForm }">
     <i
       class="fas fa-angle-down icon-toggle"
       [ngClass]="[
