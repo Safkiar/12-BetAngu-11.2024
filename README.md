@@ -1,3 +1,11 @@
+11.2024
+
+https://betangu.netlify.app/
+
+ANGULAR - FIREBASE - SCSS
+
+Betangu is an Angular app connected to Firebase, allowing users to track bets with secure authentication. Users can add bets through a simple form, and the app calculates statistics and rankings to encourage friendly competition. With modern SCSS styling, Betangu offers a sleek and responsive user experience.
+
 # BetAngu
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
